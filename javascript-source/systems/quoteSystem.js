@@ -107,7 +107,8 @@
         if (!quoteId) {
             quoteId = $.rand($.inidb.GetKeyList('quotes', '').length);
         } else if (String(quoteId).toLowerCase() == 'lastquote') {
-            quoteId = $.inidb.GetKeyList('quotes', '').length - 1;
+            var quotes = $.inidb.GetKeyValueList('quotes', '');
+            quoteId = quotes.length > 0 ? quotes[quotes.length - 1].getKey() : -1;
         } else if (isNaN(quoteId)) {
             quoteId = String(quoteId).toLowerCase();
             var quotes = $.inidb.GetKeyValueList('quotes', '');
